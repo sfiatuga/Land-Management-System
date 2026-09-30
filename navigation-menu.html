@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Select Estate - L-Time Properties</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+                url("ChatGPT Image Sep 6, 2026, 08_33_04 PM.png") center/cover no-repeat;
+    min-height: 100vh;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+  }
+
+  h1 {
+    font-size: 36px;
+    color: #ffcc00;
+    text-shadow: 2px 2px 6px black;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  .subtitle {
+    font-size: 18px;
+    margin-bottom: 40px;
+    text-align: center;
+    opacity: 0.9;
+  }
+
+  .estates-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);   /* 6 columns for easy centering */
+    gap: 25px;
+    max-width: 1100px;
+    width: 100%;
+  }
+
+  /* Top row - 3 cards (each spans 2 columns) */
+  .estate-card:nth-child(1),
+  .estate-card:nth-child(2),
+  .estate-card:nth-child(3) {
+    grid-column: span 2;
+  }
+
+  /* Bottom row - 2 cards (centered) */
+  .estate-card:nth-child(4) {
+    grid-column: 2 / 4;   /* starts at column 2 */
+  }
+  .estate-card:nth-child(5) {
+    grid-column: 4 / 6;   /* starts at column 4 */
+  }
+
+  .estate-card {
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 16px;
+    padding: 20px 20px 25px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .estate-card:hover {
+    background: rgba(255,255,255,0.22);
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+  }
+
+  .estate-card .icon {
+    width: 100%;
+    height: 160px;
+    margin-bottom: 18px;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .estate-card .icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+
+  .estate-card:hover .icon img {
+    transform: scale(1.08);
+  }
+
+  .estate-card h2 {
+    font-size: 22px;
+    margin-bottom: 0;
+    color: #ffcc00;
+  }
+
+  .back-btn {
+    margin-top: 50px;
+    padding: 14px 35px;
+    background: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+
+  .back-btn:hover {
+    background: #c82333;
+  }
+
+  /* Mobile: stack everything in 1 column */
+  @media (max-width: 768px) {
+    .estates-grid {
+      grid-template-columns: 1fr;
+    }
+    .estate-card:nth-child(1),
+    .estate-card:nth-child(2),
+    .estate-card:nth-child(3),
+    .estate-card:nth-child(4),
+    .estate-card:nth-child(5) {
+      grid-column: auto;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <h1>Select an Estate</h1>
+  <p class="subtitle">Choose a property to start navigation</p>
+
+  <div class="estates-grid">
+
+    <!-- Estate 1 -->
+    <div class="estate-card" onclick="window.location.href='map-estate1.html'">
+      <div class="icon">
+        <img src="https://app.ltimepropertiesltd.com/storage/3/Eliz-court-Dawa.jpg" alt="Peace Palace - Agortor">
+      </div>
+      <h2>Peace Palace - Agortor</h2>
+    </div>
+
+    <!-- Estate 2 -->
+    <div class="estate-card" onclick="window.location.href='map-estate2.html'">
+      <div class="icon">
+        <img src="https://app.ltimepropertiesltd.com/storage/4/cDhtDQSMqzwJItpzcsDY6aIsYfZv2hMI8CYoy474.jpg" alt="Time City - Prampram">
+      </div>
+      <h2>Time City- Prampram</h2>
+    </div>
+
+    <!-- Estate 3 -->
+    <div class="estate-card" onclick="window.location.href='map-estate3.html'">
+      <div class="icon">
+        <img src="https://ltimepropertiesltd.com/_next/image?url=https%3A%2F%2Fapp.ltimepropertiesltd.com%2Fstorage%2F1%2FLIfe-City-Prampram.jpg&w=3840&q=75" alt="Live City - Prampram">
+      </div>
+      <h2>Live City - Prampram</h2>
+    </div>
+
+    <!-- Estate 4 -->
+    <div class="estate-card" onclick="window.location.href='map-estate4.html'">
+      <div class="icon">
+        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=400&fit=crop" alt="Elizabeth Court - Dawa">
+      </div>
+      <h2>Elizabeth Court - Dawa</h2>
+    </div>
+
+    <!-- Estate 5 -->
+    <div class="estate-card" onclick="window.location.href='map-estate5.html'">
+      <div class="icon">
+        <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600&h=400&fit=crop" alt="Enyo Gardens - Dawa">
+      </div>
+      <h2>Enyo Gardens - Dawa</h2>
+    </div>
+
+  </div>
+<button onclick="window.location.href='index.html'">← Back to Home</button>
+  </button>
+
+</body>
+</html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L-Time Properties Navigation System</title>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css" />
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; font-family: Arial, Helvetica, sans-serif; }
+
+.page { display: none; position: absolute; width: 100%; height: 100%; }
+.active { display: block; }
+
+#home {
+    background:
+        linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+        url("Land pic.png");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+}
+#home h1 { font-size: clamp(32px, 6vw, 55px); color: #ffcc00; text-shadow: 3px 3px 8px black; margin-bottom: 15px; }
+#home p { font-size: 20px; margin: 0 20px 30px; max-width: 600px; }
+
+.main-button {
+  width: 280px; padding: 16px; margin: 10px;
+  border: none; border-radius: 8px; background: #28a745; color: white;
+  font-size: 18px; font-weight: bold; cursor: pointer; transition: 0.2s;
+}
+.main-button:hover { background: #1e7e34; transform: translateY(-2px); }
+.main-button.secondary { background: #007bff; }
+.main-button.secondary:hover { background: #0056b3; }
+
+.navbar {
+  position: absolute; top: 15px; right: 20px; z-index: 2000;
+  display: flex; gap: 10px;
+}
+.navbar a {
+  background: #007bff; color: white; padding: 10px 18px;
+  border-radius: 5px; text-decoration: none; font-weight: bold; font-size: 14px;
+}
+.navbar a:hover { background: #0056b3; }
+
+#about {
+    background:
+        linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+        url("About.png");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.overlay { height: 100%; padding: 80px 40px; line-height: 1.8; max-width: 800px; }
+.overlay h1 {
+    font-size: 48px;
+    margin-bottom: 25px;
+    color: #f4eac5;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+}
+.overlay p {
+    font-size: 24px;
+    line-height: 1.7;
+    color: white;
+}
+.overlay button, #contact button {
+  margin-top: 30px; padding: 15px 30px; background: #dc3545; color: white;
+  border: none; border-radius: 5px; cursor: pointer; font-weight: bold;
+}
+
+#contact { 
+  background:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
+              url("Contact.png") center/cover;
+  color: white; padding: 100px 40px; }
+#contact h1 { color: #ffcc00; margin-bottom: 25px; }
+#contact p { font-size: 18px; line-height: 2; }
+
+#system { background: white; }
+.system-bar {
+  height: 60px; background: #003366; display: flex; align-items: center;
+  padding: 0 15px; gap: 10px; z-index: 1000;
+}
+.tab {
+  background: white; color: #003366; padding: 10px 22px; border-radius: 6px;
+  cursor: pointer; font-weight: bold; font-size: 14px; transition: 0.2s;
+}
+.tab:hover, .tab.active-tab { background: #ffcc00; color: #003366; }
+
+.return-btn {
+  position: absolute; top: 75px; left: 15px; z-index: 2000;
+  background: #dc3545; color: white; padding: 10px 16px;
+  border: none; border-radius: 5px; cursor: pointer; font-weight: bold;
+}
+
+#map { height: calc(100% - 60px); width: 100%; }
+
+.info-panel {
+  position: absolute; bottom: 20px; left: 20px; z-index: 1000;
+  background: white; padding: 15px 20px; border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3); max-width: 280px;
+  display: none;
+}
+.info-panel h3 { margin-bottom: 8px; color: #003366; }
+.info-panel p { font-size: 14px; color: #333; margin-bottom: 10px; }
+</style>
+</head>
+<body>
+
+<div class="navbar" id="navLinks">
+  <a href="#" onclick="showPage('home')">Home</a>
+  <a href="#" onclick="showPage('about')">About</a>
+  <a href="#" onclick="showPage('contact')">Contact</a>
+</div>
+
+<div id="home" class="page active">
+  <h1>Welcome To L-Time Properties</h1>
+  <p>Your No.1 Lands & Real Estate Developer in Ghana</p>
+  <button class="main-button" onclick="window.location.href='navigation-menu.html'">
+  Start Navigation
+</button>
+  <!-- Opens the Land Management System in a NEW TAB -->
+  <!--button class="main-button secondary" onclick="window.open('Landmanagement.html', '_blank')"-->
+   <!-- Land Management--> 
+  </button>
+</div>
+
+<div id="about" class="page">
+  <div class="overlay">
+    <h1>About L-Time Properties</h1>
+    <p>
+      L-Time Properties provides modern housing solutions with planned communities,
+      secure environments, quality infrastructure and smart property management.
+    </p>
+    <button onclick="showPage('home')">← Return Home</button>
+  </div>
+</div>
+
+<div id="contact" class="page">
+  <h1>Contact Us</h1>
+  <p>
+    <strong>Email:</strong> info@ltimeproperties.com<br>
+    <strong>Phone:</strong> +233 24 340 7156<br>
+    <strong>Location:</strong> Accra, Ghana
+  </p>
+  <button onclick="showPage('home')">← Return Home</button>
+</div>
+
+<div id="system" class="page">
+  <div class="system-bar">
+    <div class="tab active-tab" onclick="openTab(1)">All Properties</div>
+    <div class="tab" onclick="openTab(2)">Residential</div>
+    <div class="tab" onclick="openTab(3)">Commercial</div>
+  </div>
+  <button class="return-btn" onclick="showPage('home')">← Back</button>
+  <div id="map"></div>
+  <div class="info-panel" id="infoPanel">
+    <h3 id="propTitle">Property</h3>
+    <p id="propDesc">Select a marker to view details.</p>
+    <button onclick="routeToSelected()" style="padding:8px 14px;background:#28a745;color:white;border:none;border-radius:4px;cursor:pointer;">
+      Get Directions
+    </button>
+  </div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.js"></script>
+
+<script>
+let map = null;
+let routingControl = null;
+let selectedLatLng = null;
+let markers = [];
+
+const properties = [
+  { id: 1, name: "L-Time Gardens Estate", type: "residential", lat: 5.6037, lng: -0.1870, desc: "Premium residential plots with infrastructure." },
+  { id: 2, name: "Airport City Commercial", type: "commercial", lat: 5.6050, lng: -0.1670, desc: "Prime commercial land near Kotoka Airport." },
+  { id: 3, name: "East Legon Heights", type: "residential", lat: 5.6350, lng: -0.1500, desc: "Gated community with modern amenities." },
+  { id: 4, name: "Tema Industrial Hub", type: "commercial", lat: 5.6698, lng: -0.0166, desc: "Industrial and warehouse plots." },
+  { id: 5, name: "Spintex Residential", type: "residential", lat: 5.6400, lng: -0.0800, desc: "Affordable housing plots with road network." }
+];
+
+function showPage(id) {
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  if (id === "system") {
+    document.getElementById("navLinks").style.display = "none";
+    setTimeout(() => { if (!map) initMap(); else map.invalidateSize(); }, 200);
+  } else {
+    document.getElementById("navLinks").style.display = "flex";
+  }
+}
+
+function openTab(number) {
+  document.querySelectorAll(".tab").forEach((t, i) => t.classList.toggle("active-tab", i + 1 === number));
+  clearMarkers();
+  let filtered = properties;
+  if (number === 2) filtered = properties.filter(p => p.type === "residential");
+  if (number === 3) filtered = properties.filter(p => p.type === "commercial");
+  filtered.forEach(p => addMarker(p));
+  document.getElementById("infoPanel").style.display = "none";
+}
+
+function initMap() {
+  map = L.map("map").setView([5.6037, -0.1870], 12);
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution: "© OpenStreetMap contributors", maxZoom: 19
+  }).addTo(map);
+  properties.forEach(p => addMarker(p));
+}
+
+function addMarker(prop) {
+  const marker = L.marker([prop.lat, prop.lng]).addTo(map)
+    .bindPopup(`<b>${prop.name}</b><br>${prop.desc}`);
+  marker.on("click", () => {
+    selectedLatLng = L.latLng(prop.lat, prop.lng);
+    document.getElementById("propTitle").textContent = prop.name;
+    document.getElementById("propDesc").textContent = prop.desc;
+    document.getElementById("infoPanel").style.display = "block";
+  });
+  markers.push(marker);
+}
+
+function clearMarkers() {
+  markers = [];
+  if (routingControl) { map.removeControl(routingControl); routingControl = null; }
+}
+
+function routeToSelected() {
+  if (!selectedLatLng) { alert("Please select a property first."); return; }
+  if (routingControl) map.removeControl(routingControl);
+  const start = L.latLng(5.5600, -0.2050);
+  routingControl = L.Routing.control({
+    waypoints: [start, selectedLatLng],
+    routeWhileDragging: false,
+    lineOptions: { styles: [{ color: "#28a745", weight: 6 }] }
+  }).addTo(map);
+}
+</script>
+</body>
+</html>
